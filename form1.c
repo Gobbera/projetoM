@@ -34,23 +34,37 @@ void imprimir (No *no) {
 }
 int main () {
     int op, valor;
-    char jogador1, jogador2;
+    char jogador1[5] [50];
+    char jogador2[5] [50];
+
     No *no; Pilha p; p.tam = 0; p.topo = NULL;
     printf("Jogo ProjetoM");
     do {
-        printf("\n0 - Sair\n1 - Jogar\n2 \n");
+        printf("\n0 - Sair\n1 - Jogar \n");
         scanf("%d", &op);
         switch(op) {
         case 0:
             printf("Saindo...\n");
             break;
         case 1:
-            printf("digite o nome do jogador 1");
-            scanf("%c", &jogador1);
-            printf("digite o nome do jogador 2");
-            scanf("%c", &jogador2);
+            printf("digite o nome do jogador 1 : ");
+            scanf("%s", & jogador1);
+            printf("digite o nome do jogador 2 : ");
+            scanf("%s", &jogador2);
+            printf(" \n %s\n ", jogador1);
+            printf("------VS------");
+            printf(" \n %s\n ", jogador2);
+            play(jogador1, jogador2);
             break;
         }
-    }
-        printf("Jogador 1 e:\n", &jogador1);
+    }while(op != 0);
+    return 0;
+    
+}
+int play(jogador1, jogador2) {
+    int num1;
+    printf("Vez de %s \n", jogador1);
+    printf("Escolha um numero \n");
+    scanf("%d", num1);
+    printf("jogou: %d \n", num1);
 }
