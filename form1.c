@@ -34,7 +34,7 @@ void printRandoms(int lower, int upper,int count){
 		(upper - lower + 1)) + lower;
 		printf("%d ", randomNum);
 	}
-	randomNumAlloc *rna = malloc(randomNum);
+
 }
 void randomizerNumber(){
 	int lower = 5, upper = 27, count = 1;
@@ -75,29 +75,41 @@ void load(valor, randomNum) {
     printf("\n-----PILHA-----\n");
     randomizerNumber();
     int initValue = 7;
-    int valueToBeat = *randomNum;
+    int valueToBeat = 27;
     printf("valor inicial: %d\n", initValue);
     printf("valor a bater: %d\n", valueToBeat);
 }
 
 void play(jogador1, jogador2) {
-    int playerTurn = jogador1;
-    int num1;
-    printf("Vez de %s \n", playerTurn);
+    int turn = 1,choice, gameover = 0;
     do {
-    printf("Escolha um numero \n");
-    scanf("%d", &num1);
-    printf("%s jogou: %d \n", playerTurn, num1);
-    if(num1 > 5) {
-        printf("Jogada invalida, jogue outro numero \n");
-    }
-    }while(num1 > 5);
-    if(num1 < 5) {
-    playerTurn = jogador2;
-    }
-    play(jogador1, jogador2);
-    return playerTurn;
+        int num1;
+        if(turn == 1) {
+            printf("Vez de %s \n", jogador1);
+            do {
+                printf("Escolha um numero \n");
+                scanf("%d", &num1);
+                printf("%s jogou: %d \n", jogador1, num1);
+                    if(num1 > 5) {
+                        printf("Jogada invalida, jogue outro numero \n");
+                    }
+                }while(num1 > 5);
+            turn = 2;
+        }else {
+        printf("Vez de %s \n", jogador2);
+            do {
+            printf("Escolha um numero \n");
+            scanf("%d", &num1);
+            printf("%s jogou: %d \n", jogador2, num1);
+                if(num1 > 5) {
+                printf("Jogada invalida, jogue outro numero \n");
+            }
+            }while(num1 > 5);
+            turn = 1;
+        }
+    }while(gameover = 1);
 }
+
 
 
 int main () {
@@ -118,4 +130,3 @@ int main () {
     }while(op != 0);
     return 0;
 }
-
