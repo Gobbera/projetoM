@@ -27,19 +27,17 @@ No* desempilhar(Pilha *p) {
     }
     return no;
 }
-void printRandoms(int lower, int upper,int count){
+
+void randomizerNumber(){
+	int lower = 10, upper = 100, count = 1;
+	srand(time(0));
 	int i;
 	for (i = 0; i < count; i++) {
 		int randomNum = (rand() %
 		(upper - lower + 1)) + lower;
-		printf("%d ", randomNum);
+		printf("valor inicial: %d \n", randomNum - 10);
+		printf("valor a bater: %d \n", randomNum);
 	}
-
-}
-void randomizerNumber(){
-	int lower = 5, upper = 27, count = 1;
-	srand(time(0));
-	printRandoms(lower, upper, count);
 	return 0;
 }
 void imprimir (No *no) {
@@ -74,10 +72,7 @@ void load(valor, randomNum) {
     imprimir(p.topo);
     printf("\n-----PILHA-----\n");
     randomizerNumber();
-    int initValue = 7;
-    int valueToBeat = 27;
-    printf("valor inicial: %d\n", initValue);
-    printf("valor a bater: %d\n", valueToBeat);
+
 }
 
 void play(jogador1, jogador2) {
@@ -130,3 +125,4 @@ int main () {
     }while(op != 0);
     return 0;
 }
+
