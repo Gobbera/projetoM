@@ -29,17 +29,31 @@ No* desempilhar(Pilha *p) {
 }
 
 void randomizerNumber(){
-	int lower = 10, upper = 100, count = 1;
+	int lower = 10, upper = 80, count = 1;
 	srand(time(0));
 	int i;
 	for (i = 0; i < count; i++) {
 		int randomNum = (rand() %
 		(upper - lower + 1)) + lower;
-		printf("valor inicial: %d \n", randomNum - 10);
-		printf("valor a bater: %d \n", randomNum);
+		range(randomNum);
 	}
-	return 0;
 }
+void range(randomNum) {
+    int lower = 15, upper = 30, count = 1;
+	srand(time(0));
+	int i;
+	for (i = 0; i < count; i++) {
+		int range = (rand() %
+		(upper - lower + 1)) + lower;
+		int soma = range + randomNum;
+		printValues(randomNum,range, soma);
+	}
+}
+void printValues(randomNum,range, soma) {
+		printf("valor inicial: %d \n", randomNum);
+		printf("valor a bater: %d \n", soma);
+}
+
 void imprimir (No *no) {
     if(no) {
         printf("%d\n", no->valor);
@@ -104,6 +118,9 @@ void play(jogador1, jogador2) {
         }
     }while(gameover = 1);
 }
+void creditos() {
+    printf("John wick productions studio");
+}
 
 
 
@@ -111,7 +128,7 @@ int main () {
     int op, valor;
     printf("Jogo ProjetoM");
     do {
-        printf("\n0 - Sair\n1 - Jogar \n");
+        printf("\n0 - Sair\n1 - Jogar\n2 - Creditos \n");
         scanf("%d", &op, &valor);
         switch(op) {
         case 0:
@@ -121,8 +138,12 @@ int main () {
             startGame();
             load();
             break;
+        case 2:
+            creditos();
+            break;
         }
     }while(op != 0);
     return 0;
 }
+
 
