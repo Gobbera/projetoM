@@ -60,6 +60,15 @@ void imprimir (No *no) {
         imprimir(no->proximo);
     }
 }
+void load(valor, randomNum) {
+    No *no; Pilha p; p.tam = 0; p.topo = NULL;
+    empilhar(&p, valor);
+    printf("\n-----PILHA-----\n");
+    imprimir(p.topo);
+    printf("\n-----PILHA-----\n");
+    randomizerNumber();
+
+}
 
 void startGame() {
     char jogador1[5] [50];
@@ -71,23 +80,11 @@ void startGame() {
     printf(" \n %s\n ", jogador1);
     printf("------VS------");
     printf(" \n %s\n ", jogador2);
-    load();
-    play(jogador1, jogador2);
-}
-
-void load(valor, randomNum) {
-    No *no; Pilha p; p.tam = 0; p.topo = NULL;
-    empilhar(&p, valor);
-    empilhar(&p, valor);
-    empilhar(&p, valor);
-    empilhar(&p, valor);
-    empilhar(&p, valor);
-    printf("\n-----PILHA-----\n");
-    imprimir(p.topo);
-    printf("\n-----PILHA-----\n");
     randomizerNumber();
+    play(jogador1, jogador2);
 
 }
+
 
 void play(jogador1, jogador2) {
     int turn = 1, choice, gameover = 0;
@@ -100,7 +97,7 @@ void play(jogador1, jogador2) {
                 printf("Escolha um numero \n");
                 scanf("%d", &num1);
                 printf("%s jogou: %d \n", jogador1, num1);
-                    if(num1 > 5 || num1 < -5) {
+                    if(num1 > 5 ||num1 < -5) {
                         printf("Jogada invalida, jogue outro numero \n");
                     }
                 }while(num1 > 5 || num1 < -5);
@@ -113,7 +110,7 @@ void play(jogador1, jogador2) {
             printf("Escolha um numero \n");
             scanf("%d", &num1);
             printf("%s jogou: %d \n", jogador2, num1);
-                if(num1 > 5 || num1 < -5) {
+                if(num1 > 5 ||num1 < -5) {
                 printf("Jogada invalida, jogue outro numero \n");
             }
             }while(num1 > 5 || num1 < -5);
@@ -149,25 +146,21 @@ int main () {
 }
 
 void card (jogador1, jogador2, num1) {
-    int cartasP1[5] = {1, 2, 3, 4, 5};
-    int cartasP2[5] = {1, 2, 3, 4, 5};
-        if (strcmp(jogador1, jogador1) == 0) {
-            printf("cartas do jogador %s:", jogador1);
-                for (int i = 0; i < 5; i++) {
-                    printf(" %d", cartasP1[i]);
+    if(num1 = NULL) {
+        return;
+    }
+    if(num1 >= 5 && num1 >= -5) {
+        decrementaCard(num1);
+    }
+    int deckP1[5] = {1, 2, 3, 4, 5};
+    printf("cartas do jogador %s: ", jogador1);
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", deckP1[i]);
     }
     printf("\n");
-        } else if (strcmp(jogador2, jogador2) == 0) {
-            printf("cartas do jogador %s:", jogador2);
-                for (int i = 0; i < 5; i++) {
-                    printf(" %d", cartasP2[i]);
-    }
-    printf("\n");
-    }
 }
 
 void decrementaCard (num1) {
     printf("removendo carta %d\n", num1);
+    return;
 }
-
-
