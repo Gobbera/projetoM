@@ -29,7 +29,7 @@ No* desempilhar(Pilha *p) {
 }
 
 void randomizerNumber(){
-	int lower = 10, upper = 80, count = 1;
+	int lower = 10, upper = 70, count = 1;
 	srand(time(0));
 	int i;
 	for (i = 0; i < count; i++) {
@@ -90,7 +90,7 @@ void load(valor, randomNum) {
 }
 
 void play(jogador1, jogador2) {
-    int turn = 1,choice, gameover = 0;
+    int turn = 1, choice, gameover = 0;
     do {
         int num1;
         if(turn == 1) {
@@ -104,7 +104,8 @@ void play(jogador1, jogador2) {
                         printf("Jogada invalida, jogue outro numero \n");
                     }
                 }while(num1 > 5 || num1 < -5);
-            turn = 2;
+                turn = 2;
+                decrementaCard(num1);
         }else {
         printf("Vez de %s \n", jogador2);
         card(jogador2);
@@ -117,14 +118,13 @@ void play(jogador1, jogador2) {
             }
             }while(num1 > 5 || num1 < -5);
             turn = 1;
+            decrementaCard(num1);
         }
     }while(gameover = 1);
 }
 void creditos() {
     printf("John wick productions studio");
 }
-
-
 
 int main () {
     int op, valor;
@@ -148,7 +148,7 @@ int main () {
     return 0;
 }
 
-void card (jogador1, jogador2) {
+void card (jogador1, jogador2, num1) {
     int cartasP1[5] = {1, 2, 3, 4, 5};
     int cartasP2[5] = {1, 2, 3, 4, 5};
         if (strcmp(jogador1, jogador1) == 0) {
@@ -165,3 +165,9 @@ void card (jogador1, jogador2) {
     printf("\n");
     }
 }
+
+void decrementaCard (num1) {
+    printf("removendo carta %d\n", num1);
+}
+
+
