@@ -95,25 +95,27 @@ void play(jogador1, jogador2) {
         int num1;
         if(turn == 1) {
             printf("Vez de %s \n", jogador1);
+            card(jogador1);
             do {
                 printf("Escolha um numero \n");
                 scanf("%d", &num1);
                 printf("%s jogou: %d \n", jogador1, num1);
-                    if(num1 > 5) {
+                    if(num1 > 5 || num1 < -5) {
                         printf("Jogada invalida, jogue outro numero \n");
                     }
-                }while(num1 > 5);
+                }while(num1 > 5 || num1 < -5);
             turn = 2;
         }else {
         printf("Vez de %s \n", jogador2);
+        card(jogador2);
             do {
             printf("Escolha um numero \n");
             scanf("%d", &num1);
             printf("%s jogou: %d \n", jogador2, num1);
-                if(num1 > 5) {
+                if(num1 > 5 || num1 < -5) {
                 printf("Jogada invalida, jogue outro numero \n");
             }
-            }while(num1 > 5);
+            }while(num1 > 5 || num1 < -5);
             turn = 1;
         }
     }while(gameover = 1);
@@ -146,4 +148,20 @@ int main () {
     return 0;
 }
 
-
+void card (jogador1, jogador2) {
+    int cartasP1[5] = {1, 2, 3, 4, 5};
+    int cartasP2[5] = {1, 2, 3, 4, 5};
+        if (strcmp(jogador1, jogador1) == 0) {
+            printf("cartas do jogador %s:", jogador1);
+                for (int i = 0; i < 5; i++) {
+                    printf(" %d", cartasP1[i]);
+    }
+    printf("\n");
+        } else if (strcmp(jogador2, jogador2) == 0) {
+            printf("cartas do jogador %s:", jogador2);
+                for (int i = 0; i < 5; i++) {
+                    printf(" %d", cartasP2[i]);
+    }
+    printf("\n");
+    }
+}
