@@ -108,7 +108,7 @@ void play(jogador1, jogador2) {
             do {
             printf("Escolha um numero \n");
             scanf("%d", &num2);
-            printf("%s jogou: %d \n", jogador2, num1);
+            printf("%s jogou: %d \n", jogador2, num2);
                 if(num2 > 5 ||num2 < -5) {
                 printf("Jogada invalida, jogue outro numero \n");
             }
@@ -145,28 +145,28 @@ int main () {
 }
 
 void card (jogador1, jogador2, num1, num2) {
-    int remover;
-    remover = num1;
-    printf("%d", remover);
-    if(jogador1 && num1 >= 5 && num1 >= -5) {
-        printf("cartas do jogador %s: ", jogador1);
         int deckP1[5] = {1, 2, 3, 4, 5};
-        int indice = abs(remover) - 1;
+        int deckP2[5] = {1, 2, 3, 4, 5};
+    if(jogador1) {
+        printf("cartas do jogador %s: ", jogador1);
+        int indice = abs(num1) - 1;
         deckP1[indice] = 0;
         for (int i = 0; i < 5; i++) {
         printf("%d ", deckP1[i]);
         }
         printf("\n");
+        num1 = NULL;
+        return;
     }
-    if(jogador2 && num2 >= 5 && num2 >= -5) {
+    if(jogador2) {
         printf("cartas do jogador %s: ", jogador2);
-        int deckP2[5] = {1, 2, 3, 4, 5};
         int indice = abs(num2) - 1;
         deckP2[indice] = 0;
         for (int i = 0; i < 5; i++) {
         printf("%d ", deckP2[i]);
         }
         printf("\n");
+        num1 = NULL;
+        return;
     }
 }
-
