@@ -10,11 +10,17 @@ int main() {
     int carta, total = 0;
     char resposta;
     srand(time(NULL));
-    carta = gerar_numero_aleatorio(1, 10);
+    carta = gerar_numero_aleatorio(1, 13);
     printCards(carta);
+    if (carta == 11 || carta == 12 || carta == 13) {
+        carta = 10;
+    }
     total += carta;
-    carta = gerar_numero_aleatorio(1, 10);
+    carta = gerar_numero_aleatorio(1, 13);
     printCards(carta);
+    if (carta == 11 || carta == 12 || carta == 13) {
+        carta = 10;
+    }
     total += carta;
     printf("Total de pontos: %d\n", total);
     printf("Voce quer mais cartas? (s/n): ");
@@ -82,5 +88,13 @@ void printCards(carta) {
     if(carta == 10) {
         printf ("carta DEZ %d \n", carta);
     }
+    if(carta == 11) {
+        printf ("carta DAMA %d \n", carta);
+    }
+    if(carta == 12) {
+        printf ("carta VALETE %d \n", carta);
+    }
+    if(carta == 13) {
+        printf ("carta REIS %d \n", carta);
+    }
 }
-
