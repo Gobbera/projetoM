@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+
+
+int main() {
+    globalStorage();
+}
+
+void globalStorage (valuePass) {
+    int * ptr;
+    int value = 0;
+    value = valuePass;
+    ptr = &value;
+
+    printf("endereco = %d \n", &value);
+    printf("endereco = %d \n", ptr);
+    printf("endereco = %d \n", *ptr);
+
+    changeValue(value);
+}
+
+void changeValue(value) {
+    printf("value = %d \n", value);
+    int valuePass = 0;
+    printf("digite o valor para armazenar:");
+    scanf("%d", &valuePass);
+    printf("valor armazenado = %d \n", valuePass);
+    globalStorage(valuePass);
+}
