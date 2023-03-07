@@ -11,17 +11,17 @@ int main() {
     char resposta;
     srand(time(NULL));
     carta = gerar_numero_aleatorio(1, 10);
-    printf("Sua primeira carta e: %d\n", carta);
+    printCards(carta);
     total += carta;
     carta = gerar_numero_aleatorio(1, 10);
-    printf("Sua segunda carta e: %d\n", carta);
+    printCards(carta);
     total += carta;
     printf("Total de pontos: %d\n", total);
     printf("Voce quer mais cartas? (s/n): ");
     scanf(" %c", &resposta);
     while (resposta == 's') {
         carta = gerar_numero_aleatorio(1, 10);
-        printf("Sua nova carta e: %d\n", carta);
+        printCards(carta);
         total += carta;
         printf("Total de pontos: %d\n", total);
         if (total > 21) {
@@ -49,3 +49,38 @@ int main() {
     }
     return 0;
 }
+
+
+void printCards(carta) {
+    if(carta == 1) {
+        printf ("carta AS %d \n", carta);
+    }
+    if(carta == 2) {
+        printf ("carta DOIS %d \n", carta);
+    }
+    if(carta == 3) {
+        printf ("carta TRES %d \n", carta);
+    }
+    if(carta == 4) {
+        printf ("carta QUATRO %d \n", carta);
+    }
+    if(carta == 5) {
+        printf ("carta CINCO %d \n", carta);
+    }
+    if(carta == 6) {
+        printf ("carta SEIS %d \n", carta);
+    }
+    if(carta == 7) {
+        printf ("carta SETE %d \n", carta);
+    }
+    if(carta == 8) {
+        printf ("carta OITO %d \n", carta);
+    }
+    if(carta == 9) {
+        printf ("carta NOVE %d \n", carta);
+    }
+    if(carta == 10) {
+        printf ("carta DEZ %d \n", carta);
+    }
+}
+
