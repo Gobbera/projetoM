@@ -88,21 +88,19 @@ void startGame() {
 
 void play(jogador1, jogador2) {
     int turn = 1, choice, gameover = 0;
-    int *num1;
-    int valor = 0;
     do {
+        int num1;
         if(turn == 1) {
             printf("Vez de %s \n", jogador1);
             do {
                 printf("Escolha um numero \n");
-                scanf("%d", &valor);
-                num1 = &valor;
-                printf("%s jogou: %d \n", jogador1, *num1);
-                    if(*num1 > 5 || *num1 < -5) {
+                scanf("%d", &num1);
+                printf("%s jogou: %d \n", jogador1, num1);
+                    if(num1 > 5 ||num1 < -5) {
                         printf("Jogada invalida, jogue outro numero \n");
                     }
-                }while(*num1 > 5 || *num1 < -5);
-                card(jogador1, *num1);
+                }while(num1 > 5 || num1 < -5);
+                card(jogador1, num1);
                 turn = 2;
         }else {
         printf("Vez de %s \n", jogador2);
@@ -147,24 +145,20 @@ int main () {
 }
 
 void card (jogador1, jogador2, num1, num2) {
-    printf("num1 = %d \n", num1);
-    int remover;
-    remover = num1;
-    printf("remover = %d \n", remover);
-    if(jogador1) {
         int deckP1[5] = {1, 2, 3, 4, 5};
+        int deckP2[5] = {1, 2, 3, 4, 5};
+    if(jogador1) {
         printf("cartas do jogador %s: ", jogador1);
         int indice = abs(num1) - 1;
         deckP1[indice] = 0;
-        printf("remover = %d \n", num1);
         for (int i = 0; i < 5; i++) {
         printf("%d ", deckP1[i]);
         }
         printf("\n");
+        num1 = NULL;
         return;
     }
     if(jogador2) {
-        int deckP2[5] = {1, 2, 3, 4, 5};
         printf("cartas do jogador %s: ", jogador2);
         int indice = abs(num2) - 1;
         deckP2[indice] = 0;
@@ -172,6 +166,7 @@ void card (jogador1, jogador2, num1, num2) {
         printf("%d ", deckP2[i]);
         }
         printf("\n");
+        num1 = NULL;
         return;
     }
 }
