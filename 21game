@@ -1,87 +1,51 @@
-
-
 #include <stdio.h>
-#include <conio.h>
 #include <stdlib.h>
 #include <time.h>
 
-int main()
+int gerar_numero_aleatorio(int min, int max) {
+    return rand() % (max - min + 1) + min;
+}
 
-{
-int soma, ap, tf=1000, cartas,comp;
-char jog[30], x;
+int main() {
+    int carta, total = 0;
+    char resposta;
+    srand(time(NULL));
+    carta = gerar_numero_aleatorio(1, 10);
+    printf("Sua primeira carta e: %d\n", carta);
+    total += carta;
+    carta = gerar_numero_aleatorio(1, 10);
+    printf("Sua segunda carta e: %d\n", carta);
+    total += carta;
+    printf("Total de pontos: %d\n", total);
+    printf("Voce quer mais cartas? (s/n): ");
+    scanf(" %c", &resposta);
+    while (resposta == 's') {
+        carta = gerar_numero_aleatorio(1, 10);
+        printf("Sua nova carta e: %d\n", carta);
+        total += carta;
+        printf("Total de pontos: %d\n", total);
+        if (total > 21) {
+            printf("Voce perdeu!\n");
+            return 0;
+        }
+        printf("Voce quer mais cartas? (s/n): ");
+        scanf(" %c", &resposta);
+    }
+    int dealer_total = 0;
+    printf("Vez do dealer...\n");
+    while (dealer_total < 17) {
+        carta = gerar_numero_aleatorio(1, 10);
+        printf("Dealer tirou um %d\n", carta);
+        dealer_total += carta;
+    }
+    printf("Total do dealer: %d\n", dealer_total);
 
-srand(time(NULL));
-printf ("Informe seu nome: ");
-gets(jog);
-do
-
-{
-
- do
-
- {
-
-  system ("cls");
-  soma=0;
-  comp=0;
-//voce ESQUECEU DE INICIALIZAR O COMP
-  printf ("\n %s voce possui %d fichas",jog, tf);
-  printf ("\n\nInforme o valor de sua aposta: ");
-  scanf ("%d", &ap);
-
- }while (ap>tf);
-
- do
- {
-  system("cls");
-  cartas=rand()%13+1;
-   if (cartas>10)
-   {
-    cartas=10;
-    soma+=cartas;
-   }
-   else
-//AQUI EU TIREI AS CHAVES PARA APARECER O TOTAL DE PONTOS 
-    soma+=cartas;
-    printf ("\n\n %s voce fez %d pontos. O total de %d",jog, cartas, soma);
-    printf ("\n\nDigite h para continuar ou s para sair: ");
-    fflush(stdin);
-    x=getchar();
- }while(x=='h');
- do
- {
-
-  if (cartas+comp>21)
-   break;
-  cartas=rand()%13+1;
-  comp+=cartas;
-  printf ("\n\nO Computador fez %d pontos",comp);
- }while(comp<20);
-
- if ((soma>comp && soma<=21)||(comp>21 && soma<=21))
-
-//AQUI EU IMPLEMENTEI O OR PARA CASO O COMP ESTOURAR
- {
-  printf ("\n\n%s voce ganhou com %d pontos",jog,soma);
-  tf=tf+ap;
-  printf ("\nVoce possui %d fichas",tf);
-  printf ("\n\nO computador perdeu com %d pontos",comp);
- }
-
- else 
-  if ((comp>soma && comp<=21)||(soma>21 && comp<=21))
-//AQUI EU IMPLEMENTEI O OR PARA CASO você ESTOURAR
-  {
-   printf ("\n\nO computador ganhou com %d pontos",comp);
-   tf=tf-ap;
-   printf ("\n\nVoce perdeu com %d pontos e ainda tem %d para apostar",soma,tf);
-  }
- else
-//AQUI O SENAO CASO OS DOIS ESTOURAR
-  printf("\n\nNao houve vencedores!!!"); 
- getch(); 
-}while(tf>0);
-getch();
-return 0;
-} 
+    if (dealer_total > 21 || total > dealer_total) {
+        printf("Voce ganhou!\n");
+    } else if (total == dealer_total) {
+        printf("Empate!\n");
+    } else {
+        printf("Voce perdeu!\n");
+    }
+    return 0;
+}
