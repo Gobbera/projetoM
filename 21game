@@ -1,0 +1,87 @@
+
+
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+
+{
+int soma, ap, tf=1000, cartas,comp;
+char jog[30], x;
+
+srand(time(NULL));
+printf ("Informe seu nome: ");
+gets(jog);
+do
+
+{
+
+ do
+
+ {
+
+  system ("cls");
+  soma=0;
+  comp=0;
+//voce ESQUECEU DE INICIALIZAR O COMP
+  printf ("\n %s voce possui %d fichas",jog, tf);
+  printf ("\n\nInforme o valor de sua aposta: ");
+  scanf ("%d", &ap);
+
+ }while (ap>tf);
+
+ do
+ {
+  system("cls");
+  cartas=rand()%13+1;
+   if (cartas>10)
+   {
+    cartas=10;
+    soma+=cartas;
+   }
+   else
+//AQUI EU TIREI AS CHAVES PARA APARECER O TOTAL DE PONTOS 
+    soma+=cartas;
+    printf ("\n\n %s voce fez %d pontos. O total de %d",jog, cartas, soma);
+    printf ("\n\nDigite h para continuar ou s para sair: ");
+    fflush(stdin);
+    x=getchar();
+ }while(x=='h');
+ do
+ {
+
+  if (cartas+comp>21)
+   break;
+  cartas=rand()%13+1;
+  comp+=cartas;
+  printf ("\n\nO Computador fez %d pontos",comp);
+ }while(comp<20);
+
+ if ((soma>comp && soma<=21)||(comp>21 && soma<=21))
+
+//AQUI EU IMPLEMENTEI O OR PARA CASO O COMP ESTOURAR
+ {
+  printf ("\n\n%s voce ganhou com %d pontos",jog,soma);
+  tf=tf+ap;
+  printf ("\nVoce possui %d fichas",tf);
+  printf ("\n\nO computador perdeu com %d pontos",comp);
+ }
+
+ else 
+  if ((comp>soma && comp<=21)||(soma>21 && comp<=21))
+//AQUI EU IMPLEMENTEI O OR PARA CASO você ESTOURAR
+  {
+   printf ("\n\nO computador ganhou com %d pontos",comp);
+   tf=tf-ap;
+   printf ("\n\nVoce perdeu com %d pontos e ainda tem %d para apostar",soma,tf);
+  }
+ else
+//AQUI O SENAO CASO OS DOIS ESTOURAR
+  printf("\n\nNao houve vencedores!!!"); 
+ getch(); 
+}while(tf>0);
+getch();
+return 0;
+} 
