@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct no {
+    int valor;
+    struct no *proximo;
+}No;
+
+typedef struct {
+    No *topo;
+    int tam;
+}Pilha;
+
+void empilhar(Pilha *p, int x) {
+    No *no = malloc(sizeof(No));
+    no->valor = x;
+    no->proximo = p->topo;
+    p->topo = no;
+}
+
+No* desempilhar(Pilha *p) {
+    No *no = NULL;
+    if(p->topo) {
+        no = p->topo;
+        p->topo = no->proximo;
+    }
+    return no;
+}
+void imprimir (No *no) {
+    if(no) {
+        printf("%d\n", no->valor);
+        imprimir(no->proximo);
+    }
+}
+void passValue() {
+    int value;
+    printf("digite um valor:\n");
+    scanf("%d", &value);
+    receiveValue(value);
+}
+
+int main () {
+    passValue();
+}
+
+void receiveValue(value) {
+    printf("valor passado %d:\n", value);
+    int op, valor;
+    int switchValue;
+        if(value == 1 || value == 2 || value == 3 || value == 4 || value == 5) {
+            switchValue = 0;
+        }
+        if(value == -1 || value == -2 || value == -3 || value == -4 || value == -5) {
+            switchValue = 1;
+        }
+        No *no; Pilha p; p.tam = 0; p.topo = NULL;
+        op = switchValue;
+        valor = value;
+        switch(op) {
+        case 0:
+            printf("Valor a ser empilhado: %d\n", valor);
+            empilhar(&p, valor);
+                printf("\n-----PILHA-----\n");
+                imprimir(p.topo);
+                printf("\n-----PILHA-----\n");
+            break;
+        case 1:
+            printf("Valor a ser desempilhado: %d\n", valor);
+            no = desempilhar(&p);
+            if(no) {
+                printf("\tDesempilhando: %d\n", no->valor);
+            }
+                printf("\n-----PILHA-----\n");
+                imprimir(p.topo);
+                printf("\n-----PILHA-----\n");
+            break;
+        default:
+            printf("Opcao invalida!\n");
+        }
+        main();
+}
+
+
