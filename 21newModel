@@ -1,0 +1,239 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int gerar_numero_aleatorio(int min, int max) {
+    return rand() % (max - min + 1) + min;
+}
+int main () {
+    int op, valor;
+    printf("    Jogo ProjetoM");
+    do {
+        printf("\n  0 - Sair\n  1 - Jogar\n  2 - Creditos\n");
+        scanf("%d", &op, &valor);
+        switch(op) {
+        case 0:
+            printf("    Saindo...\n");
+            break;
+        case 1:
+            system("cls");
+            startGame();
+            break;
+        case 2:
+            creditos();
+            break;
+        }
+    }while(op != 0);
+    return 0;
+}
+void creditos() {
+    printf("John wick productions studio");
+}
+
+int startGame() {
+    int carta, carta1, carta2, total = 0;
+    char* cartaModel = (char*) malloc(3 * sizeof(char));
+    char resposta;
+    srand(time(NULL));
+    carta1 = gerar_numero_aleatorio(1, 13);
+    if (carta1 == 11 || carta1 == 12 || carta1 == 13) {
+        carta1 = 10;
+    }
+    total += carta1;
+
+    carta2 = gerar_numero_aleatorio(1, 13);
+    if (carta2 == 11 || carta2 == 12 || carta2 == 13) {
+        carta2 = 10;
+    }
+    printCards(carta1, carta2);
+    total += carta2;
+
+    printf("    Total de pontos: %d\n", total);
+    printf("    Voce quer mais cartas? (s/n): ");
+    scanf(" %c", &resposta);
+    while (resposta == 's') {
+        carta = gerar_numero_aleatorio(1, 10);
+        printCards(carta);
+        total += carta;
+        printf("Total de pontos: %d\n", total);
+        if (total > 21) {
+            printf("    Voce perdeu!\n");
+            return 0;
+        }
+        printf("    Voce quer mais cartas? (s/n): ");
+        scanf(" %c", &resposta);
+    }
+    int dealer_total = 0;
+    printf("    Vez do dealer...\n");
+    while (dealer_total < 17) {
+        carta = gerar_numero_aleatorio(1, 10);
+        printf("    Dealer tirou um %d\n", carta);
+        dealer_total += carta;
+    }
+    printf("    Total do dealer: %d\n", dealer_total);
+
+    if (dealer_total > 21 || total > dealer_total) {
+        printf("    Voce ganhou!\n");
+    } else if (total == dealer_total) {
+        printf("    Empate!\n");
+    } else {
+        printf("    Voce perdeu!\n");
+    }
+    return 0;
+}
+
+
+void printCards(carta, carta1, carta2) {
+    printf("\n");
+        printf ("                         #####################\n");
+        printf ("                         #%d  .............   #\n", carta2);
+        printf ("                         #  |             |  #\n");
+        printf ("       #####################              |  #\n");
+        printf ("       #%d  .............   #              |  #\n", carta1);
+        printf ("       #  |             |  #              |  #\n");
+        printf ("       #  |             |  #              |  #\n");
+        printf ("       #  |             |  #      %d       |  #\n", carta2);
+        printf ("       #  |             |  #              |  #\n");
+        printf ("       #  |             |  #              |  #\n");
+        printf ("       #  |      %d      |  #              |  #\n", carta1);
+        printf ("       #  |             |  #              |  #\n");
+        printf ("       #  |             |  #              |  #\n");
+        printf ("       #  |             |  # .............|  #\n");
+        printf ("       #  |             |  #                %d#\n",carta2);
+        printf ("       #  |             |  ###################\n");
+        printf ("       #  |.............|  #                  \n");
+        printf ("       #                  %d#                 \n", carta1);
+        printf ("       #####################                  \n");
+
+        if(carta) {
+        printf ("       ##################### \n");
+        printf ("       # A .............   # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |      A      |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |.............|  # \n");
+        printf ("       #                 A # \n");
+        printf ("       ##################### \n");
+    }
+}
+
+    /*
+    if(carta == 1) {
+        printf ("       ##################### \n");
+        printf ("       # A .............   # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |      A      |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |.............|  # \n");
+        printf ("       #                 A # \n");
+        printf ("       ##################### \n");
+    }
+    if(carta >=2 && carta <= 9) {
+        printf ("       ##################### \n");
+        printf ("       #%d  .............   # \n", carta);
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |      %d      |  # \n", carta);
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |.............|  # \n");
+        printf ("       #                 %d # \n", carta);
+        printf ("       ##################### \n");
+    }
+    if(carta == 10) {
+        printf ("       ##################### \n");
+        printf ("       # 10.............   # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |     10      |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |.............|  # \n");
+        printf ("       #                10 # \n");
+        printf ("       ##################### \n");
+    }
+    if(carta == 11) {
+        printf ("       ##################### \n");
+        printf ("       # Q .............   # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |      Q      |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |.............|  # \n");
+        printf ("       #                 Q # \n");
+        printf ("       ##################### \n");
+    }
+    if(carta == 12) {
+        printf ("       ##################### \n");
+        printf ("       # J .............   # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |      J      |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |.............|  # \n");
+        printf ("       #                 J # \n");
+        printf ("       ##################### \n");
+    }
+    if(carta == 13) {
+        printf ("       ##################### \n");
+        printf ("       # K .............   # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |      K      |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |.............|  # \n");
+        printf ("       #                 K # \n");
+        printf ("       ##################### \n");
+    }
+    printf("\n\n");
+}
+*/
