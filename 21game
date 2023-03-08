@@ -59,42 +59,98 @@ int main() {
 
 void printCards(carta) {
     if(carta == 1) {
-        printf ("carta AS %d \n", carta);
+        printf ("carta \n", carta);
+        printf ("##################### \n");
+        printf ("# A .............   # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |      A      |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |.............|  # \n");
+        printf ("#                 A # \n");
+        printf ("##################### \n");
     }
-    if(carta == 2) {
-        printf ("carta DOIS %d \n", carta);
-    }
-    if(carta == 3) {
-        printf ("carta TRES %d \n", carta);
-    }
-    if(carta == 4) {
-        printf ("carta QUATRO %d \n", carta);
-    }
-    if(carta == 5) {
-        printf ("carta CINCO %d \n", carta);
-    }
-    if(carta == 6) {
-        printf ("carta SEIS %d \n", carta);
-    }
-    if(carta == 7) {
-        printf ("carta SETE %d \n", carta);
-    }
-    if(carta == 8) {
-        printf ("carta OITO %d \n", carta);
-    }
-    if(carta == 9) {
-        printf ("carta NOVE %d \n", carta);
-    }
-    if(carta == 10) {
-        printf ("carta DEZ %d \n", carta);
+    if(carta >=2 && carta <= 10) {
+        printf ("carta \n", carta);
+        printf ("##################### \n");
+        printf ("#%d .............    # \n", carta);
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |      %d      |  # \n", carta);
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |.............|  # \n");
+        printf ("#                %d  # \n", carta);
+        printf ("##################### \n");
     }
     if(carta == 11) {
-        printf ("carta DAMA %d \n", carta);
+        printf ("carta DAMA \n");
+        printf ("##################### \n");
+        printf ("# A .............   # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |      A      |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |.............|  # \n");
+        printf ("#                 A # \n");
+        printf ("##################### \n");
     }
     if(carta == 12) {
-        printf ("carta VALETE %d \n", carta);
+        printf ("carta VALETE \n");
+        printf ("##################### \n");
+        printf ("# A .............   # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |      A      |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |.............|  # \n");
+        printf ("#                 A # \n");
+        printf ("##################### \n");
     }
     if(carta == 13) {
-        printf ("carta REIS %d \n", carta);
+        printf ("carta REIS \n");
+        printf ("##################### \n");
+        printf ("# A .............   # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |      A      |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |             |  # \n");
+        printf ("#  |.............|  # \n");
+        printf ("#                 A # \n");
+        printf ("##################### \n");
     }
 }
