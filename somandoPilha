@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 typedef struct no {
     int valor;
@@ -44,40 +45,131 @@ int somar(Pilha *p) {
     return soma;
 }
 
+int gerar_numero_aleatorio(int min, int max) {
+    return rand() % (max - min + 1) + min;
+}
 int main () {
     int op, valor;
-    No *no; Pilha p; p.tam = 0; p.topo = NULL;
+    printf("    Jogo ProjetoM");
     do {
-        printf("\n0 - Sair\n1 - Empilhar\n2 - Desempilhar\n3 - Imprimir\n4 - Somar\n");
-        scanf("%d", &op);
+        printf("\n  0 - Sair\n  1 - Jogar\n  2 - Creditos\n");
+        scanf("%d", &op, &valor);
         switch(op) {
         case 0:
-            printf("Saindo...\n");
+            printf("    Saindo...\n");
             break;
         case 1:
-            printf("Valor a ser empilhado:");
-            scanf("%d", &valor);
-            empilhar(&p, valor);
+            system("cls");
+            startGame();
             break;
         case 2:
-            no = desempilhar(&p);
-            if(no) {
-                printf("\tDesempilhando: %d\n", no->valor);
-            }
+            creditos();
             break;
-        case 3:
-            printf("\n-----PILHA-----\n");
-            imprimir(p.topo);
-            printf("\n-----PILHA-----\n");
-            break;
-        case 4:
-            printf("Somando valores da pilha...\n");
-            int soma = somar(&p);
-            printf("A soma dos valores na pilha e: %d\n", soma);
-            break;
-        default:
-            printf("Opcao invalida!\n");
         }
     }while(op != 0);
     return 0;
+}
+void creditos() {
+    printf("John wick productions studio");
+}
+
+int startGame() {
+    int valor;
+    No *no; Pilha p; p.tam = 0; p.topo = NULL;
+    int carta, carta1, carta2, total = 0;
+    char* cartaModel = (char*) malloc(3 * sizeof(char));
+    char resposta;
+    srand(time(NULL));
+    carta1 = gerar_numero_aleatorio(1, 13);
+    if (carta1 == 11 || carta1 == 12 || carta1 == 13) {
+        carta1 = 10;
+    }
+    valor = carta1;
+    empilhar(&p, valor);
+
+    carta2 = gerar_numero_aleatorio(1, 13);
+    if (carta2 == 11 || carta2 == 12 || carta2 == 13) {
+        carta2 = 10;
+    }
+    valor = carta2;
+    empilhar(&p, valor);
+    printCards(carta1, carta2);
+    int soma = somar(&p);
+
+    printf("    Total de pontos: %d\n", soma);
+    printf("    Voce quer mais cartas? (s/n): ");
+    scanf(" %c", &resposta);
+    while (resposta == 's') {
+        carta = gerar_numero_aleatorio(1, 10);
+        printCardsAfter(carta);
+        valor = carta;
+        empilhar(&p, valor);
+        int soma = somar(&p);
+        printf("    Total de pontos: %d\n", soma);
+        if (soma > 21) {
+            printf("    Voce perdeu!\n");
+            return 0;
+        }
+        printf("    Voce quer mais cartas? (s/n): ");
+        scanf(" %c", &resposta);
+    }
+    int dealer_total = 0;
+    printf("    Vez do dealer...\n");
+    while (dealer_total < 17) {
+        carta = gerar_numero_aleatorio(1, 10);
+        printf("    Dealer tirou um %d\n", carta);
+        dealer_total += carta;
+    }
+    printf("    Total do dealer: %d\n", dealer_total);
+
+    if (dealer_total > 21 || total > dealer_total) {
+        printf("    Voce ganhou!\n");
+    } else if (total == dealer_total) {
+        printf("    Empate!\n");
+    } else {
+        printf("    Voce perdeu!\n");
+    }
+    return 0;
+}
+
+
+void printCards(carta1, carta2) {
+    printf("\n");
+        printf ("                         #####################\n");
+        printf ("                         #%d  .............   #\n", carta2);
+        printf ("                         #  |             |  #\n");
+        printf ("       #####################              |  #\n");
+        printf ("       #%d  .............   #              |  #\n", carta1);
+        printf ("       #  |             |  #      *       |  #\n");
+        printf ("       #  |             |  #     ***      |  #\n");
+        printf ("       #  |             |  #    *****     |  #\n", carta2);
+        printf ("       #  |    ** **    |  #     ***      |  #\n");
+        printf ("       #  |   *******   |  #      *       |  #\n");
+        printf ("       #  |    *****    |  #              |  #\n", carta1);
+        printf ("       #  |     ***     |  #              |  #\n");
+        printf ("       #  |      *      |  #              |  #\n");
+        printf ("       #  |             |  # .............|  #\n");
+        printf ("       #  |             |  #               %d #\n",carta2);
+        printf ("       #  |             |  ###################\n");
+        printf ("       #  |.............|  #                  \n");
+        printf ("       #                 %d #                 \n", carta1);
+        printf ("       #####################                  \n");
+}
+void printCardsAfter(carta){
+        printf ("       ##################### \n");
+        printf ("       #%d  .............   # \n", carta);
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |     **      |  # \n");
+        printf ("       #  |    ****     |  # \n");
+        printf ("       #  |   ******    |  # \n");
+        printf ("       #  |     **      |  # \n");
+        printf ("       #  |    ****     |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |             |  # \n");
+        printf ("       #  |.............|  # \n");
+        printf ("       #                 %d # \n", carta);
+        printf ("       ##################### \n");
 }
