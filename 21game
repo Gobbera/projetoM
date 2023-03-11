@@ -45,12 +45,14 @@ int somar(Pilha *p) {
     return soma;
 }
 
-int gerar_numero_aleatorio(int min, int max) {
+int randomNumber(int min, int max) {
     return rand() % (max - min + 1) + min;
 }
 int main () {
+    win();
     int op, valor;
-    printf("    Jogo ProjetoM");
+    printf("\n\n\n");
+    printf("    Black Jack");
     do {
         printf("\n  0 - Sair\n  1 - Jogar\n  2 - Creditos\n");
         scanf("%d", &op, &valor);
@@ -69,9 +71,7 @@ int main () {
     }while(op != 0);
     return 0;
 }
-void creditos() {
-    printf("John wick productions studio");
-}
+
 
 int startGame() {
     int valor;
@@ -80,16 +80,17 @@ int startGame() {
     char* cartaModel = (char*) malloc(3 * sizeof(char));
     char resposta;
     srand(time(NULL));
-    total = gerar_numero_aleatorio(30, 100);
-    printf("Voce tem que chegar mais proximo do no numero %d", total);
-    carta1 = gerar_numero_aleatorio(1, 13);
+    total = randomNumber(30, 50);
+    printf("\n");
+    printf("    Voce tem que chegar mais proximo do no numero %d", total);
+    carta1 = randomNumber(1, 13);
     if (carta1 == 11 || carta1 == 12 || carta1 == 13) {
         carta1 = 10;
     }
     valor = carta1;
     empilhar(&p, valor);
 
-    carta2 = gerar_numero_aleatorio(1, 13);
+    carta2 = randomNumber(1, 13);
     if (carta2 == 11 || carta2 == 12 || carta2 == 13) {
         carta2 = 10;
     }
@@ -102,14 +103,14 @@ int startGame() {
     printf("    Voce quer mais cartas? (s/n): ");
     scanf(" %c", &resposta);
     while (resposta == 's') {
-        carta = gerar_numero_aleatorio(1, 10);
+        carta = randomNumber(1, 10);
         printCardsAfter(carta);
         valor = carta;
         empilhar(&p, valor);
         soma = somar(&p);
         printf("    Total de pontos: %d\n", soma);
         if (soma > total) {
-            printf("    Voce perdeu!\n");
+            lose();
             return 0;
         }
         printf("    Voce quer mais cartas? (s/n): ");
@@ -117,23 +118,69 @@ int startGame() {
     }
     int dealer_total = 0;
     printf("    Vez do dealer...\n");
-    while (dealer_total < total - 5) {
-        carta = gerar_numero_aleatorio(1, 10);
+    while (dealer_total < total - 4) {
+        carta = randomNumber(1, 10);
         printf("    Dealer tirou um %d\n", carta);
         dealer_total += carta;
     }
     printf("    Total do dealer: %d\n", dealer_total);
 
     if (dealer_total > total || soma > dealer_total) {
-        printf("    Voce ganhou!\n");
+        win();
     } else if (soma == dealer_total) {
         printf("    Empate!\n");
     } else {
-        printf("    Voce perdeu!\n");
+        lose();
     }
     return 0;
 }
+void win() {
+    printf("    Voce ganhou!                                                                               \n           ");
+    printf("                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@@@&@@@@@@@@@@@@@@@@@@@@@@@@@@@&@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@,,,,@@@@#,..,@@ ,,,,///,,.,&@@@,,,(@@@@....@@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@(.,, @@&,,,,@@@(,,,#@@@,,  &@@@,,,(@@@@,,  @@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@@@/.,,,  ./@@@@(,,,#@@@. ,,&@@# ,,(@@@@  ,.@@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@@@@/   ,./@@@@@/   #@@@,,,,&@@#,  /@@@@,,,,@@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@@@@@.,,,&@@@@@@(,,,#@@@,,,,&@@# ,,/@@@@,,,,@@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@@@@@,,,,&@@@@@@/,,,#@@@,,,.&@@#,,,(@@@@,,,.@@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@@@@@,...&@@@@@@@(//.....//(@@@@//......../&@@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@,,,,@@@@@@@@@@@@@,,. @@,,,,&@@#,,,.@@@@,,,,@@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@,,,,&@@@,,,,@@@@   ./@@,,, &@@#  ,,,@@@    @@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@*,  &@@&,,   &@@,,,.@@@.   &@@#,,,,, #@,,,.@@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@@.,,,@    .,,,,(,,,#@@@,,,,&@@#   , ,,@,,,,@@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@@/.  ,,,,/@*,,,   .#@@@.,,,&@@#,,,/#.,,,,,,@@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@@@/.,,,.#@@&*.,,,./@@@@...,&@@#,,,(@@/.,,,,@@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@@@@*.../@@@@@/...*@@@@@....&@@#.../@@@(....@@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n           ");
+    printf("                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n           ");
+}
 
+void lose() {        printf("Voce perdeu \n");
+        printf("                                              .(@@@@@@@@@@@%,                      \n");
+        printf("                                         @@@                   ,@@                 \n");
+        printf("                                      @@.                          @@              \n");
+        printf("                                     @                               @&            \n");
+        printf("                                    @                                 @#           \n");
+        printf("                                   #@ *@                           /@  @           \n");
+        printf("                                   (@ .@                           #@  @           \n");
+        printf("                                    @  &@                         ,@  @@           \n");
+        printf("                                     @ .@  .@@@@@@@      @@@@@@&  %@ @@            \n");
+        printf("                                      @@@ @@@@@@@@@     @@@@@@@@@  @@              \n");
+        printf("                             @@@(      @   @@@@@@&       .@@@@@@,  @%     /@@@.    \n");
+        printf("                            *@  .@     @     /@.    @ @@   .@&     &%    @#  ,@    \n");
+        printf("                           @@      #@@.*@.        ,@@ @@@         @@ @@@       @%  \n");
+        printf("                          &@&&@@@/      #@@#@@(   *@@ %@@    @@#@@@.      @@@%&@@  \n");
+        printf("                                   (@@(.   @.&,@           /@ #@/    @@@           \n");
+        printf("                                        *@@@@. @. & .* #% %. @ @@@(                \n");
+        printf("                                          %@# @@. &(&&%%( &.,, @@                  \n");
+        printf("                                     (@@(  .@    *%@&@&@&(    %@  .&@@*            \n");
+        printf("                             #@           &@@@@.            .@#@@           .@     \n");
+        printf("                               @@    #@@.       @@@@@@@@@@@.       &@@    #@(      \n");
+        printf("                                @/  @                                 @@  @.       \n");
+        printf("                                 @@.                                    @@.        \n");
+}
 
 void printCards(carta1, carta2) {
     printf("\n");
@@ -175,3 +222,55 @@ void printCardsAfter(carta){
         printf ("       #                 %d # \n", carta);
         printf ("       ##################### \n");
 }
+
+void creditos() {
+printf("                                                                                                                          \n");
+printf("                                                                                                                          \n");
+printf("                                                        *&@&&%%%@@*                                                       \n");
+printf("                                                        @@@%%%%%@@&                                                       \n");
+printf("                                                        &@&@%&%&@@@                                                       \n");
+printf("                                                        &@@&%&%%@@@                                                       \n");
+printf("                                                        @@@@&@&@@@@                                                       \n");
+printf("                                                        &@@@@@@@@@@                                                       \n");
+printf("                                                        @@@@@@@@@@&                                                       \n");
+printf("                                                       &@@@ (#@&@@@&                                                      \n");
+printf("                                                      &&@@@&@@@@@@@&&                                                     \n");
+printf("                                                      &&&#*,,..,(&@@@                                                     \n");
+printf("                                                      .%%%(/////#%%%.                                                     \n");
+printf("                                                                    .                                                     \n");
+printf("                                                      ,@@@@@@@@@@@@&*                                                     \n");
+printf("                                                      *&@@@@@@@@@@&@/                                                     \n");
+printf("                                                       @&//%&&@&@@@&                                                      \n");
+printf("                                                   %#&((#&%%&%&&#%/##@@                                                   \n");
+printf("                                                %((//////((##%%%%##((////(,.                                              \n");
+printf("                                           #@@@@%%%&&&&&&&&@@&&&@&&&&&&@%%@@@@@                                           \n");
+printf("                                           %@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&@@@@&                                           \n");
+printf("                                           #&@@@&@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&                                           \n");
+printf("                                            @@@@&&&&&&&&&&&&&%%%%%%&&&&&%%@@@@%                                           \n");
+printf("                                            @#@@*&&&&&&&(&&&&&&&&/&&&&&&& @@(@%                                           \n");
+printf("                                            @%@@/%&&&&&&&& & &&&&&&&@@&&%/@@%@%                                           \n");
+printf("                                            @&@#&&&& &..@@.&.@(#/  &,# &&&@@#@%                                           \n");
+printf("                                            @(@@ &% *%. *,(%@&%,/ @..%@.& @@@@&                                           \n");
+printf("                                            @*@.& (&&&&&*&*@&@@,@*@@@@#.& @@@@&                                           \n");
+printf("                                            @,@@&&&&&./,@@@&&%*@@@...&@@@&@@/@&                                           \n");
+printf("                                            @*@@&&&#(.%@@@.@/.@&#@@@//@@&&@@@@&                                           \n");
+printf("                                            @%@&%&&&@.&#.@&&%@@@@ *#.@@@@%@@/@&                                           \n");
+printf("                                            @@@@.&&&&&&@@@#(*(.*@@@@@@@@@ @@/@&                                           \n");
+printf("                                            @/@@#&&&&%&%@@@@@@@#@@@&@@@@@/@@/@&                                           \n");
+printf("                                            @*@@#&&&&&&&@@@@@@@@@@@@@@@@&/@@/@&                                           \n");
+printf("                                            @@@@.&&&&&@@@@@@@@@@@@@@@@@@@*@@/@&                                           \n");
+printf("                                            @@@@,&&&@&&@&%@%&&#&/((@/@@@@ @@@@%                                           \n");
+printf("                                            @#@@.&&&&&/ @@@##@#@//@@@@@@@ @@%@#                                           \n");
+printf("                                            @%@@&&&&&%%&@@@@@@@@@@@@@@@@@&@@@@(                                           \n");
+printf("                                            @#@@@&&((/@../.# @*%.&@((##/@&@@@@(                                           \n");
+printf("                                            @#@@@@&&@@@@@@@@@@@@@@@@@@@@@&@@&@/                                           \n");
+printf("                                            @(@@&&&&&&&@,@&&@&@@&.@@@@/@@#@@(@*                                           \n");
+printf("                                            @@@@&&&&&&&&@@&@&&&&&&&&&&&&&&@@@@,                                           \n");
+printf("                                            @@@@@@&@@@@@@@@@@@@@@@@@@@@@@@@@@@.                                           \n");
+printf("                                           &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&@@@@                                           \n");
+printf("                                           (@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%                                           \n");
+printf("                                            /&@&&(@&&@@@@@&&&%&&@@@%&@@#&@@@&@*                                           \n");
+printf("                                              (,%/*/(#(((#%@@@@@//#/**,//*/*/                                             \n");
+printf("                                                                                                                          \n");
+}
+
